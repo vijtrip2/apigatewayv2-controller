@@ -19,9 +19,9 @@ import (
 	"context"
 	"strings"
 
-	ackv1alpha1 "github.com/aws/aws-controllers-k8s/apis/core/v1alpha1"
-	ackcompare "github.com/aws/aws-controllers-k8s/pkg/compare"
-	ackerr "github.com/aws/aws-controllers-k8s/pkg/errors"
+	ackv1alpha1 "github.com/aws-controllers-k8s/runtime/apis/core/v1alpha1"
+	ackcompare "github.com/aws-controllers-k8s/runtime/pkg/compare"
+	ackerr "github.com/aws-controllers-k8s/runtime/pkg/errors"
 	"github.com/aws/aws-sdk-go/aws"
 	svcsdk "github.com/aws/aws-sdk-go/service/apigatewayv2"
 	corev1 "k8s.io/api/core/v1"
@@ -125,6 +125,7 @@ func (rm *resourceManager) sdkFind(
 	}
 
 	rm.setStatusDefaults(ko)
+
 	return &resource{ko}, nil
 }
 
@@ -161,7 +162,7 @@ func (rm *resourceManager) sdkCreate(
 	ctx context.Context,
 	r *resource,
 ) (*resource, error) {
-	input, err := rm.newCreateRequestPayload(r)
+	input, err := rm.newCreateRequestPayload(ctx, r)
 	if err != nil {
 		return nil, err
 	}
@@ -187,6 +188,7 @@ func (rm *resourceManager) sdkCreate(
 // newCreateRequestPayload returns an SDK-specific struct for the HTTP request
 // payload of the Create API call for the resource
 func (rm *resourceManager) newCreateRequestPayload(
+	ctx context.Context,
 	r *resource,
 ) (*svcsdk.CreateAuthorizerInput, error) {
 	res := &svcsdk.CreateAuthorizerInput{}
@@ -256,7 +258,7 @@ func (rm *resourceManager) sdkUpdate(
 	diffReporter *ackcompare.Reporter,
 ) (*resource, error) {
 
-	input, err := rm.newUpdateRequestPayload(desired)
+	input, err := rm.newUpdateRequestPayload(ctx, desired)
 	if err != nil {
 		return nil, err
 	}
@@ -282,6 +284,7 @@ func (rm *resourceManager) sdkUpdate(
 // newUpdateRequestPayload returns an SDK-specific struct for the HTTP request
 // payload of the Update API call for the resource
 func (rm *resourceManager) newUpdateRequestPayload(
+	ctx context.Context,
 	r *resource,
 ) (*svcsdk.UpdateAuthorizerInput, error) {
 	res := &svcsdk.UpdateAuthorizerInput{}
@@ -350,6 +353,7 @@ func (rm *resourceManager) sdkDelete(
 	ctx context.Context,
 	r *resource,
 ) error {
+
 	input, err := rm.newDeleteRequestPayload(r)
 	if err != nil {
 		return err

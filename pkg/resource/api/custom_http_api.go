@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	ackcompare "github.com/aws/aws-controllers-k8s/pkg/compare"
 	"github.com/aws-controllers-k8s/apigatewayv2-controller/apis/v1alpha1"
+	ackcompare "github.com/aws-controllers-k8s/runtime/pkg/compare"
 	"github.com/aws/aws-sdk-go/service/apigatewayv2"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
