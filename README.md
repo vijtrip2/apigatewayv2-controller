@@ -25,4 +25,3 @@ You can also learn more about our [Governance](/GOVERNANCE.md) structure.
 
 This project is [licensed](/LICENSE) under the Apache-2.0 License.
 
-[new major version]
