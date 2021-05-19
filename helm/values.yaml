@@ -26,12 +26,12 @@ resources:
 
 aws:
   # If specified, use the AWS region for AWS API calls
-  region: ""
+  region: "us-west-2"
 
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # The name of the service account to use.
   name: ack-apigatewayv2-controller
-  annotations: {}
-    # eks.amazonaws.com/role-arn: arn:aws:iam::AWS_ACCOUNT_ID:role/IAM_ROLE_NAME
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::309117047740:role/ack-apigatewayv2-controller

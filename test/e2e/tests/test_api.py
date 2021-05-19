@@ -36,7 +36,7 @@ DELETE_WAIT_AFTER_SECONDS = 10
 UPDATE_WAIT_AFTER_SECONDS = 10
 APIGW_DEPLOYMENT_WAIT_AFTER_SECONDS = 10
 
-apigw_validator = ApiGatewayValidator(boto3.client('apigatewayv2'))
+apigw_validator = ApiGatewayValidator(boto3.client('apigatewayv2', region_name=get_region()))
 test_resource_values = REPLACEMENT_VALUES.copy()
 
 
