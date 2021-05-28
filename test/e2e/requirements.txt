@@ -1,1 +1,1 @@
-acktest @ git+https://github.com/vijtrip2/test-infra.git@soak-test
+acktest @ git+https://github.com/aws-controllers-k8s/test-infra.git@main
