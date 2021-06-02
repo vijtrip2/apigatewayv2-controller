@@ -1,7 +1,8 @@
+{{- if .Values.metrics.service.create }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "app.fullname" . }}
+  name: {{ include "app.fullname" . }}-metrics
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/name: {{ include "app.name" . }}
@@ -20,8 +21,10 @@ spec:
 {{- range $key, $value := .Values.deployment.labels }}
     {{ $key }}: {{ $value | quote }}
 {{- end }}
+  type: {{ .Values.metrics.service.type }}
   ports:
-    - name: metricsport
-      port: 8080
-      targetPort: 8080
-      protocol: TCP
+  - name: metricsport
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+{{- end }}
